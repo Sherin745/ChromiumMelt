@@ -1,15 +1,16 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Homepage() {
   return (
  
-    <div className="bg-gray-50">
+    <div className="bg-gradient-to-r from-indigo-600 to-pink-500 min-h-screen">
       {/* Navigation Bar */}
-      <nav className="bg-white shadow-md py-6">
+      <nav className="bg-gradient-to-r from-indigo-600 via-pink-500 to-white">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-4">
-         {/* Logo */}
-         <a className="navbar-brand" href="#">
-            <h1 className="text-4xl dancing font-extrabold text-indigo-600 font-dancingScript hover:text-indigo-700 transition">
+          {/* Logo */}
+          <a className="navbar-brand" href="#">
+            <h1 className="text-4xl dancing font-extrabold text-white font-dancingScript hover:text-indigo-200 transition">
               Chromium <br /> Melt 
             </h1>
           </a>
@@ -29,13 +30,13 @@ function Homepage() {
           <div className="lg:flex space-x-10 hidden" id="navbarNav">
             <a href="#about" className="text-lg font-medium text-gray-700 hover:text-indigo-600 transition">About</a>
             <a href="#updates" className="text-lg font-medium text-gray-700 hover:text-indigo-600 transition">Updates</a>
-            <a href="#signup" className="text-lg font-medium text-gray-700 hover:text-indigo-600 transition">Sign Up/Login</a>
+            <a href="#signup" className="text-lg font-medium text-gray-700 hover:text-indigo-600 transition">Login</a>
           </div>
         </div>
       </nav>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-gradient-to-r from-indigo-50 to-white">
+      <section id="about" className="py-20 bg-blue-50 ">
         <div className="max-w-7xl mx-auto text-center px-6">
           <h2 className="text-4xl font-bold text-gray-800">About</h2>
           <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
@@ -53,7 +54,7 @@ function Homepage() {
       </section>
 
       {/* Updates Section */}
-      <section id="updates" className="py-20 bg-gray-100">
+      <section id="updates" className="py-20 bg-blue-100">
         <div className="max-w-7xl mx-auto text-center px-6">
           <h2 className="text-4xl font-bold text-gray-800">Latest Updates</h2>
           <p className="mt-6 text-lg text-gray-600">Stay updated with the latest news and announcements.</p>
@@ -80,29 +81,38 @@ function Homepage() {
         </div>
       </section>
 
-      {/* Sign Up / Login Section */}
-      <section id="signup" className="py-20 bg-white">
+      {/*Login Section */}
+      <section id="signup" className="py-20 bg-blue-50">
         <div className="max-w-7xl mx-auto text-center px-6">
-          <h2 className="text-4xl font-bold text-gray-800">Sign Up / Login</h2>
+          <h2 className="text-4xl font-bold text-gray-800">Login</h2>
           <div className="mt-12 max-w-md mx-auto">
             <form>
               <div className="mb-6">
                 <label htmlFor="email" className="block text-left text-gray-700">Email address</label>
-                <input type="email" className="w-full p-4 mt-2 border border-gray-300 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="email" placeholder="Enter your email" />
+                <input type="email" className="w-full p-4 mt-2 border border-gray-300 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="email" placeholder="Enter your email" />
               </div>
               <div className="mb-6">
                 <label htmlFor="password" className="block text-left text-gray-700">Password</label>
-                <input type="password" className="w-full p-4 mt-2 border border-gray-300 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="password" placeholder="Enter your password" />
+                <input type="password" className="w-full p-4 mt-2 border border-gray-300 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="password" placeholder="Enter your password" />
               </div>
               <div className="mb-6 flex items-center">
                 <input type="checkbox" className="form-checkbox text-indigo-600" id="rememberMe" />
                 <label className="ml-3 text-gray-700" htmlFor="rememberMe">Remember me</label>
               </div>
-              <button type="submit" className="w-full py-4 mt-6 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition">Sign In</button>
+              <button type="submit" className="w-full py-4 mt-6 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition">Login</button>
             </form>
           </div>
         </div>
       </section>
+      
+    {/* Register Now Button */}
+    <div className="flex justify-center mt-10">
+        <Link to="/register">
+          <button className="bg-indigo-500 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:bg-indigo-700 transition">
+            Register Now
+          </button>
+        </Link>
+      </div>
 
       {/* Footer Section */}
       <footer className="bg-gray-900 text-white text-center py-6">
