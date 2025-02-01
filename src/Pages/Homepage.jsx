@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Login from '../Widget/Login';
 
 function Homepage() {
   return (
@@ -80,31 +81,8 @@ function Homepage() {
           </div>
         </div>
       </section>
-
-      {/*Login Section */}
-      <section id="signup" className="py-20 bg-blue-50">
-        <div className="max-w-7xl mx-auto text-center px-6">
-          <h2 className="text-4xl font-bold text-gray-800">Login</h2>
-          <div className="mt-12 max-w-md mx-auto">
-            <form>
-              <div className="mb-6">
-                <label htmlFor="email" className="block text-left text-gray-700">Email address</label>
-                <input type="email" className="w-full p-4 mt-2 border border-gray-300 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="email" placeholder="Enter your email" />
-              </div>
-              <div className="mb-6">
-                <label htmlFor="password" className="block text-left text-gray-700">Password</label>
-                <input type="password" className="w-full p-4 mt-2 border border-gray-300 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="password" placeholder="Enter your password" />
-              </div>
-              <div className="mb-6 flex items-center">
-                <input type="checkbox" className="form-checkbox text-indigo-600" id="rememberMe" />
-                <label className="ml-3 text-gray-700" htmlFor="rememberMe">Remember me</label>
-              </div>
-              <button type="submit" className="w-full py-4 mt-6 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition">Login</button>
-            </form>
-          </div>
-        </div>
-      </section>
-      
+     <Login/>
+     
     {/* Register Now Button */}
     <div className="flex justify-center mt-10">
         <Link to="/register">
