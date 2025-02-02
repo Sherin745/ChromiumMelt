@@ -7,6 +7,7 @@ export default function ChromiumTreatment() {
   const [credits, setCredits] = useState(0);
   const [previousCredits, setPreviousCredits] = useState(0);
   const [treatmentMethod, setTreatmentMethod] = useState("");
+  const [previousChromiumLevel, setPreviousChromiumLevel] = useState(0);
 
   useEffect(() => {
     const storedCredits = localStorage.getItem("userCredits");
@@ -18,7 +19,12 @@ export default function ChromiumTreatment() {
   const handleInputChange = (e) => {
     const level = parseFloat(e.target.value);
     setChromiumLevel(level);
-    determineTreatment(level);
+    if (level > 0 && level !== previousChromiumLevel) {
+      determineTreatment(level);
+      setPreviousChromiumLevel(level);
+    } else if (level === 0) {
+      resetValues();
+    }
   };
 
   const determineTreatment = (level) => {
@@ -31,21 +37,28 @@ export default function ChromiumTreatment() {
       method = "Chemical Precipitation";
       remaining = level * 0.1;
       risk = "Moderate";
-      credit=2;
     } else if (level > 50 && level <= 100) {
       method = "Ion Exchange";
       remaining = level * 0.2;
       risk = "High";
-      credit = 1;
     } else if (level > 100) {
       method = "Reverse Osmosis";
       remaining = level * 0.3;
       risk = "Critical";
-      credit = 0;
     } else {
       method = "No Treatment Needed";
       remaining = 0;
       risk = "Low";
+    }
+
+    const reductionPercentage = level > 0 ? ((level - remaining) / level) * 100 : 0;
+
+    if (reductionPercentage > 50) {
+      credit = 3;
+    } else if (reductionPercentage > 30) {
+      credit = 2;
+    } else if (reductionPercentage > 10) {
+      credit = 1;
     }
 
     setTreatmentMethod(method);
@@ -58,8 +71,15 @@ export default function ChromiumTreatment() {
     localStorage.setItem("userCredits", totalCredits);
   };
 
+  const resetValues = () => {
+    setTreatmentMethod("");
+    setRemainingChromium(0);
+    setRiskLevel("Low");
+    setCredits(0);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-100 p-6">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-blue-500 p-6">
       <div className="bg-white p-10 rounded-2xl shadow-2xl max-w-md w-full border border-gray-300">
         <h2 className="text-4xl font-extrabold mb-6 text-center text-gray-900">Chromium Treatment Advisor</h2>
         <label className="block mb-4 font-semibold text-gray-700 text-lg">Enter Chromium Level (ppm):</label>
@@ -82,13 +102,12 @@ export default function ChromiumTreatment() {
               Risk Level: {riskLevel}
             </p>
           </div>
-          <div className="bg-gray-200 p-4 rounded-xl shadow-lg text-center">
-            <p className="text-xl text-gray-700">Credits Earned: <span className="font-bold text-green-600">{credits}</span></p>
-          </div>
-          <div className="bg-gray-300 p-4 rounded-xl shadow-lg text-center">
-            <p className="text-xl font-semibold text-gray-800">Previous Credits: <span className="font-bold text-blue-600">{previousCredits}</span></p>
-          </div>
         </div>
+      </div>
+      <div className="bg-white p-6 mt-6 rounded-2xl shadow-2xl max-w-md w-full border border-gray-300 text-center">
+        <h3 className="text-2xl font-bold mb-4 text-gray-900">Credits Section</h3>
+        <p className="text-xl text-gray-700">Credits Earned: <span className="font-bold text-green-600">{credits}</span></p>
+        <p className="text-xl text-gray-700">Previous Credits: <span className="font-bold text-blue-600">{previousCredits}</span></p>
       </div>
     </div>
   );
