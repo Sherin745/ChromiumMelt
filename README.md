@@ -67,6 +67,8 @@ This project is a **Chromium Disposal Management System** designed to help compa
 <img src="./public/Img1.png">
 <img src="./public/Img2.png">
 <img src="./public/Img3.png">
+<img src="./public/Img4.png">
+<img src="./public/Img5.png">
 
 
 ## License
