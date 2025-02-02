@@ -64,6 +64,10 @@ This project is a **Chromium Disposal Management System** designed to help compa
 - Graphical representation of chromium reduction trends.
 - Integration with regulatory compliance bodies.
 
+<img src="./public/Img1.png">
+<img src="./public/Img2.png">
+<img src="./public/Img3.png">
+
 
 ## License
 This project is licensed under the MIT License.
