@@ -3,13 +3,20 @@ import { auth, db } from "../firebase/config"; // Import Firestore and Firebase 
 import { getDoc, updateDoc, doc } from "firebase/firestore"; // Import Firestore methods
 import { onAuthStateChanged } from "firebase/auth"; // Firebase auth method
 import { arrayUnion } from "firebase/firestore"; // Correct arrayUnion import
+import { useNavigate } from "react-router-dom";
 
 export default function ChromiumTicket() {
+  const navigate = useNavigate();
   const [chromiumLevel, setChromiumLevel] = useState("");
   const [treatmentMethod, setTreatmentMethod] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(""); // Error state for form submission
   const [user, setUser] = useState(null); // Current authenticated user
+
+  // Navigate to the user's profile
+  const handleTicket = () => {
+    navigate('/profile');
+  };
 
   // Check if the user is authenticated
   useEffect(() => {
@@ -69,9 +76,9 @@ export default function ChromiumTicket() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-blue-200 p-6">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-blue-100 p-8">
       {!submitted ? (
-        <div className="bg-white p-10 rounded-2xl shadow-2xl max-w-md w-full border border-gray-300">
+        <div className="bg-white p-12 rounded-2xl shadow-2xl max-w-md w-full border border-gray-300">
           <h2 className="text-4xl font-extrabold mb-6 text-center text-gray-900">
             Chromium Disposal Form
           </h2>
@@ -80,43 +87,47 @@ export default function ChromiumTicket() {
           {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
           <form onSubmit={handleSubmit}>
-            <label className="block mb-2 font-semibold text-gray-700 text-lg">
-              Enter Chromium Level (ppm):
-            </label>
-            <input
-              type="number"
-              className="w-full p-3 border rounded-xl shadow-md focus:ring-4 focus:ring-indigo-500 focus:outline-none text-lg"
-              value={chromiumLevel}
-              onChange={(e) => setChromiumLevel(e.target.value)}
-              placeholder="Enter level"
-              required
-            />
+            <div className="mb-6">
+              <label className="block mb-2 font-semibold text-gray-700 text-lg">
+                Enter Chromium Level (ppm):
+              </label>
+              <input
+                type="number"
+                className="w-full p-4 border rounded-xl shadow-md focus:ring-4 focus:ring-indigo-500 focus:outline-none text-lg"
+                value={chromiumLevel}
+                onChange={(e) => setChromiumLevel(e.target.value)}
+                placeholder="Enter level"
+                required
+              />
+            </div>
 
-            <label className="block mt-4 mb-2 font-semibold text-gray-700 text-lg">
-              Select Disposal Method:
-            </label>
-            <select
-              className="w-full p-3 border rounded-xl shadow-md focus:ring-4 focus:ring-indigo-500 focus:outline-none text-lg"
-              value={treatmentMethod}
-              onChange={(e) => setTreatmentMethod(e.target.value)}
-              required
-            >
-              <option value="">Select Method</option>
-              <option value="Chemical Precipitation">Chemical Precipitation</option>
-              <option value="Ion Exchange">Ion Exchange</option>
-              <option value="Reverse Osmosis">Reverse Osmosis</option>
-            </select>
+            <div className="mb-6">
+              <label className="block mb-2 font-semibold text-gray-700 text-lg">
+                Select Disposal Method:
+              </label>
+              <select
+                className="w-full p-4 border rounded-xl shadow-md focus:ring-4 focus:ring-indigo-500 focus:outline-none text-lg"
+                value={treatmentMethod}
+                onChange={(e) => setTreatmentMethod(e.target.value)}
+                required
+              >
+                <option value="">Select Method</option>
+                <option value="Chemical Precipitation">Chemical Precipitation</option>
+                <option value="Ion Exchange">Ion Exchange</option>
+                <option value="Reverse Osmosis">Reverse Osmosis</option>
+              </select>
+            </div>
 
             <button
               type="submit"
-              className="mt-6 w-full bg-indigo-600 text-white py-3 rounded-xl shadow-md hover:bg-indigo-700 transition"
+              className="mt-6 w-full bg-indigo-600 text-white py-4 rounded-xl shadow-md hover:bg-indigo-700 transition"
             >
               Submit
             </button>
           </form>
         </div>
       ) : (
-        <div className="bg-white p-10 rounded-2xl shadow-2xl max-w-md w-full border border-gray-300 text-center">
+        <div className="bg-white p-12 rounded-2xl shadow-2xl max-w-md w-full border border-gray-300 text-center">
           <h3 className="text-3xl font-bold text-gray-900">Disposal Ticket</h3>
           <p className="text-lg text-gray-700 mt-4">
             Chromium Level:{" "}
@@ -129,12 +140,20 @@ export default function ChromiumTicket() {
           <p className="text-lg text-gray-700 mt-4">
             Thank you for submitting your disposal details. We will review and contact you shortly.
           </p>
-          <button
-            className="mt-6 bg-blue-600 text-white py-3 px-6 rounded-xl shadow-md hover:bg-blue-700 transition"
-            onClick={() => setSubmitted(false)}
-          >
-            Submit Another
-          </button>
+          <div className="mt-8 flex justify-between space-x-4">
+            <button
+              className="mt-6 bg-blue-600 text-white py-3 px-6 rounded-xl shadow-md hover:bg-blue-700 transition"
+              onClick={() => setSubmitted(false)}
+            >
+              Submit Another
+            </button>
+            <button
+              className="mt-6 bg-blue-600 text-white py-3 px-6 rounded-xl shadow-md hover:bg-blue-700 transition"
+              onClick={handleTicket}
+            >
+              Back to Profile
+            </button>
+          </div>
         </div>
       )}
     </div>

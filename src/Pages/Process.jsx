@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ChromiumTreatment() {
+    const navigate = useNavigate();
   const [chromiumLevel, setChromiumLevel] = useState(0);
   const [remainingChromium, setRemainingChromium] = useState(0);
   const [riskLevel, setRiskLevel] = useState("Low");
   const [credits, setCredits] = useState(0);
   const [previousCredits, setPreviousCredits] = useState(0);
   const [treatmentMethod, setTreatmentMethod] = useState("");
-
+  const handleTicket = () => {
+    navigate('/profile');
+  };
   useEffect(() => {
     const storedCredits = localStorage.getItem("userCredits");
     if (storedCredits) {
@@ -53,9 +57,7 @@ export default function ChromiumTreatment() {
     setRiskLevel(risk);
     setCredits(credit);
 
-    const totalCredits = previousCredits + credit;
-    setPreviousCredits(totalCredits);
-    localStorage.setItem("userCredits", totalCredits);
+
   };
 
   return (
@@ -85,11 +87,16 @@ export default function ChromiumTreatment() {
           <div className="bg-gray-200 p-4 rounded-xl shadow-lg text-center">
             <p className="text-xl text-gray-700">Credits Earned: <span className="font-bold text-green-600">{credits}</span></p>
           </div>
-          <div className="bg-gray-300 p-4 rounded-xl shadow-lg text-center">
-            <p className="text-xl font-semibold text-gray-800">Previous Credits: <span className="font-bold text-blue-600">{previousCredits}</span></p>
-          </div>
+      <button
+              className="mt-6 bg-blue-600 text-white py-3 px-6 rounded-xl shadow-md hover:bg-blue-700 transition"
+              onClick={handleTicket}
+            >
+              Back to Profile
+            </button>
+          
         </div>
-      </div>
+      </div> 
+      
     </div>
   );
 }
