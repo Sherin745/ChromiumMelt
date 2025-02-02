@@ -2,7 +2,7 @@ import Homepage from "./Pages/Homepage"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import RegisterNow from "./Pages/Register";
 import ChromiumTreatment from "./Pages/Process";
-import Profile from "./Pages/profile";
+import Profile from "./Pages/Profile";
 import ChromiumTicket from "./Pages/ChromiumTicket";
 function App() {
 
