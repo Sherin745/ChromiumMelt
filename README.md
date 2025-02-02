@@ -66,7 +66,9 @@ This project is a **Chromium Disposal Management System** designed to help compa
 ## Future Enhancements
 - User authentication system for secure company logins.
 - Graphical representation of chromium reduction trends.
-- Integration with regulatory compliance bodies.
+- Integration with regulatory compliance bodies.\
+  
+##Screenshots
 
 <img src="./public/Img1.png">
 <img src="./public/Img2.png">
